@@ -1,0 +1,29 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-warning">
+    <%= @user.errors.count %>errors prohibited this book from being saved:<br>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+      </ul>
+  </div>
+<% end %>
+<div class="container">
+  <div class="row">
+    <h2>User info</h2>
+
+      <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+          <%= @user.errors.count %>件のエラーが発生しました
+          <% @user.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
+        <% end %>
+        <div class="field"><strong>Name</strong><%= f.text_field :name %></div>
+        <div class="field"><strong>Image</strong>
+        <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %></div>
+        <div class="field"><strong>introduction</strong><%= f.text_area :introduction %></div>
+        <div class="actions"><%= f.submit %></div>
+      <% end %>
+  </div>
+</div>
